@@ -1,4 +1,4 @@
-Summary:	Virtual tunnel over TCP/IP networks.
+Summary:	Virtual tunnel over TCP/IP networks
 Name:		vtun
 Version:	2.6
 Release:	%mkrel 9
