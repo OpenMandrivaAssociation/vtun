@@ -16,7 +16,6 @@ Requires(pre): rpm-helper
 Requires(postun): rpm-helper
 #JMD: For static binary
 BuildRequires:	openssl-static-devel, glibc-static-devel
-BuildRoot:	%_tmppath/%{name}-buildroot
 
 %description
 VTun provides the method for creating Virtual Tunnels over TCP/IP networks
