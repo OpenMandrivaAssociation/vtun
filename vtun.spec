@@ -1,11 +1,11 @@
 Summary:	Virtual tunnel over TCP/IP networks
 Name:		vtun
-Version:	2.6
-Release:	%mkrel 9
+Version:	3.0.1
+Release:	%mkrel 1
 License:	GPL
 Group:		Networking/Other
 URL:		http://vtun.sourceforge.net/
-Source:		%{name}-%{version}.tar.bz2
+Source:		%{name}-%{version}.tar.gz
 Source1:	vtund.init.tar.bz2
 Obsoletes:	vppp
 Provides:	vppp
@@ -31,7 +31,7 @@ to any kernel parts.
 
 %prep
 
-%setup -q -n %{name}
+%setup -q
 
 %build
 
