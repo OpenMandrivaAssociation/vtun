@@ -36,7 +36,7 @@ to any kernel parts.
 %build
 
 %configure \
-    --localstatedir=%{_localstatedir}/%{name} \
+    --localstatedir=%{_localstatedir}/lib/%{name} \
     --enable-ssl \
     --disable-lzo
 
