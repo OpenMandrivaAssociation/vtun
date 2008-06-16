@@ -1,6 +1,6 @@
 Summary:	Virtual tunnel over TCP/IP networks
 Name:		vtun
-Version:	3.0.1
+Version:	3.0.2
 Release:	%mkrel 1
 License:	GPL
 Group:		Networking/Other
