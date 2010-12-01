@@ -9,7 +9,7 @@ Source:		%{name}-%{version}.tar.gz
 Source1:	vtund.init.tar.bz2
 Obsoletes:	vppp
 Provides:	vppp
-BuildRequires:	zlib1-devel bison openssl-devel flex
+BuildRequires:	zlib-devel bison openssl-devel flex
 Requires(post): rpm-helper
 Requires(preun): rpm-helper
 Requires(pre): rpm-helper
