@@ -1,13 +1,14 @@
 Summary:	Virtual tunnel over TCP/IP networks
 Name:		vtun
-Version:	3.0.2
-Release:	%mkrel 3
-License:	GPL
+Version:	3.0.3
+Release:	%mkrel 1
+License:	GPLv2
 Group:		Networking/Other
 URL:		http://vtun.sourceforge.net/
-Source:		%{name}-%{version}.tar.gz
-Source1:	vtund.init.tar.bz2
-Obsoletes:	vppp
+Source0:	http://downloads.sourceforge.net/project/vtun/vtun/%{version}/%{name}-%{version}.tar.gz
+Source1:	vtun.socket
+Source2:	vtun.service
+
 Provides:	vppp
 BuildRequires:	zlib-devel bison openssl-devel flex
 Requires(post): rpm-helper
@@ -16,7 +17,6 @@ Requires(pre): rpm-helper
 Requires(postun): rpm-helper
 #JMD: For static binary
 BuildRequires:	openssl-static-devel, glibc-static-devel
-BuildRoot:	%_tmppath/%{name}-buildroot
 
 %description
 VTun provides the method for creating Virtual Tunnels over TCP/IP networks
@@ -35,7 +35,7 @@ to any kernel parts.
 
 %build
 
-%configure \
+%configure2_5x \
     --localstatedir=%{_localstatedir}/lib/%{name} \
     --enable-ssl \
     --disable-lzo
@@ -53,47 +53,30 @@ cat << EOF >> config.h
 #define HAVE_PTSNAME
 EOF
 
-%make \
-    CFG_FILE=%{_sysconfdir}/vtund.conf \
-    PID_FILE=/var/run/vtund.pid  \
-    STAT_DIR=/var/log/vtund \
-    LOCK_DIR=/var/lock/vtund
+%make
 
 %install
-rm -rf $RPM_BUILD_ROOT
+make install DESTDIR=%{buildroot} INSTALL_OWNER= INSTALL="/usr/bin/install -p"
+install -D -m 0644 -p %{SOURCE1} %{buildroot}/%{_unitdir}/vtun.socket
+install -D -m 0644 -p %{SOURCE2} %{buildroot}/%{_unitdir}/vtun.service
 
-install -d $RPM_BUILD_ROOT/var/{log,lock}/vtund
-tar -jxvf %{SOURCE1} -C $RPM_BUILD_ROOT
-install vtund -D ${RPM_BUILD_ROOT}/%{_sbindir}/vtund
-install scripts/reroute ${RPM_BUILD_ROOT}/%{_sbindir}
-
-install vtund.8 -D ${RPM_BUILD_ROOT}/%{_mandir}/man8/vtund.8
-install  vtund.conf.5 -D ${RPM_BUILD_ROOT}/%{_mandir}/man5/vtund.5
-
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 %post
-%_post_service vtund
-%_post_service vtunc
+%_post_service vtun.service
+%_post_service vtun.socket
 
 %preun
-%_preun_service vtund
-%_preun_service vtunc
+%_preun_service vtun.service
+%_preun_service vtun.socket
 
 %files
 %defattr(644,root,root,755)
-%doc ChangeLog Credits FAQ README README.Setup README.Shaper TODO
-%doc vtund.conf
-%config(noreplace) %_sysconfdir/xinetd.d/vtun
-%config(noreplace) %_sysconfdir/sysconfig/vtun?
-%_initrddir/vtun?
-%dir /var/log/vtund
-%dir /var/lock/vtund
-%_mandir/man8/*
-%_mandir/man5/*
-%defattr(755,root,root,755)
-%_sbindir/vtund
-%_sbindir/reroute
-
-
+%doc ChangeLog Credits FAQ README README.LZO README.Setup README.Shaper TODO vtund.conf
+%config(noreplace) %{_sysconfdir}/vtund.conf
+%{_unitdir}/vtun.socket
+%{_unitdir}/vtun.service
+%{_sbindir}/vtund
+%dir %{_localstatedir}/lib/vtun
+%{_mandir}/man5/vtund.conf.5*
+%{_mandir}/man8/vtun.8*
+%{_mandir}/man8/vtund.8*
