@@ -1,0 +1,7 @@
+[Unit]
+Description=Virtual Tunnels over TCP/IP networks
+After=local-fs.target
+
+[Service]
+ExecStart=/usr/sbin/vtund -i 
+StandardInput=socket

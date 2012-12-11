@@ -1,4 +1,2 @@
 sources:
-  "vtun-3.0.3.tar.gz:"	7937e46420b5c2323f36774ab22e75e11c12da6c
-  "vtun.service:"	725c47ee9c1c40db02329c8a907706d70ae1b88b
-  "vtun.socket:"	286e8c36f1da10d596158ccabf31ed97d7dd0efe
+  "vtun-3.0.3.tar.gz": 7937e46420b5c2323f36774ab22e75e11c12da6c
