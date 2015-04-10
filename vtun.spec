@@ -17,6 +17,7 @@ Requires(pre): rpm-helper
 Requires(postun): rpm-helper
 #JMD: For static binary
 BuildRequires:	openssl-static-devel, glibc-static-devel
+BuildRequires: gcc-c++, gcc, gcc-cpp
 
 %description
 VTun provides the method for creating Virtual Tunnels over TCP/IP networks
@@ -34,6 +35,8 @@ to any kernel parts.
 %setup -q
 
 %build
+export CC=gcc
+export CXX=g++
 
 %configure2_5x \
     --localstatedir=%{_localstatedir}/lib/%{name} \
