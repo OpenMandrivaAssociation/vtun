@@ -40,7 +40,7 @@ to any kernel parts.
 export CC=gcc
 export CXX=g++
 
-%configure2_5x \
+%configure \
     --localstatedir=%{_localstatedir}/lib/%{name} \
     --enable-ssl \
     --disable-lzo
