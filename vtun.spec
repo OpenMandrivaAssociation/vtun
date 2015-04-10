@@ -1,3 +1,5 @@
+%define debug_package	%{nil}
+
 Summary:	Virtual tunnel over TCP/IP networks
 Name:		vtun
 Version:	3.0.3
