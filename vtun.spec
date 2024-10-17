@@ -6,7 +6,7 @@ Version:	3.0.3
 Release:	2
 License:	GPLv2
 Group:		Networking/Other
-URL:		http://vtun.sourceforge.net/
+URL:		https://vtun.sourceforge.net/
 Source0:	http://downloads.sourceforge.net/project/vtun/vtun/%{version}/%{name}-%{version}.tar.gz
 Source1:	vtun.socket
 Source2:	vtun.service
