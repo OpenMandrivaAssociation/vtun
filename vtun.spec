@@ -12,6 +12,11 @@ Source1:	vtun.socket
 Source2:	vtun.service
 
 Provides:	vppp
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	zlib-devel bison openssl-devel flex
 Requires(post): rpm-helper
 Requires(preun): rpm-helper
